@@ -1,13 +1,13 @@
 "use strict";
-var http = require('http');
-var app = require('./app');
+const http = require('http');
+const app = require('./app');
 
-var port = derivePort(process.env.PORT || '8080');
-var ip_address = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+const port = derivePort(process.env.PORT || '8080');
+const ip_address = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 server.listen(port, ip_address);
 server.on('error', onError);
@@ -15,7 +15,7 @@ server.on('listening', onListening);
 
 /** Derive port number **/
 function derivePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
   if (isNaN(port)) {
     return val;
   }
@@ -28,8 +28,8 @@ function derivePort(val) {
 /** Event listener for HTTP server "listening" event **/
 
 function onListening() {
-  var address = server.address();
-  var bind = typeof address === 'string' ? 'pipe ' + address  : 'port ' + address.port; 
+  const address = server.address();
+  const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port;
   console.log('Listening on ' + bind);
 }
 
